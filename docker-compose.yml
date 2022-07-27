@@ -1,0 +1,36 @@
+version: '3'
+
+networks:
+  net:
+    driver: bridge
+services:
+  database :
+      image : 'mongo'
+      container_name : 'my-mongo-container'
+      networks:
+      - net
+      environment : 
+      - MONGO_INITDB_DATABASE = 'tms'
+      - MONGO_INITDB_ROOT_USERNAME ='sai'
+      - MONGO_INITDB_ROOT_PASSWORD = 'Kambin@1234'
+      volumes : 
+       - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+       - ./mongo-volume:/data/db
+      ports :
+      - '27017-27019:27017-27019'
+
+  jwtNode :      
+     container_name: jwtNode
+     restart: always
+     image: node:latest
+     networks:
+      - net
+     user: node
+     working_dir: /home/node/app
+     environment:
+      - ENV=development
+     volumes:
+      - ./:/home/node/app
+     ports:
+      - 8080:8080
+     command: 'node server.js'
