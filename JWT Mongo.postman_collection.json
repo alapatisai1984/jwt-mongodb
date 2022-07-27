@@ -1,0 +1,331 @@
+{
+	"info": {
+		"_postman_id": "040722ad-e397-46ea-9ac0-9fadd4adbbc6",
+		"name": "JWT Mongo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api auth signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\" : \"sai1\",\n     \"email\" : \"sai@sai.com\",\n     \"password\" : \"admin@1234\",\n     \"roles\": [\"admin\",\"user\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/auth/signup",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api auth signin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    var res = pm.response.json();",
+							"    postman.setEnvironmentVariable(\"token\", res.accessToken);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\" : \"sai1\",\n    \"password\" : \"admin@1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/auth/signin",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api user updateuserpassword",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZGZmYzdhYzFmN2NjNGYxNDZmOGFmNCIsImlhdCI6MTY1ODg0NjM0OSwiZXhwIjoxNjU4OTMyNzQ5fQ.QVBFYaYdJfK0cG-0NylXWS1X1ir9kGHqc9mWkHmZ4yA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"new_password\" : \"password9\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/user/updateuserpassword",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"updateuserpassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api update user profile",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\" : \"sai62\",\n    \"email\" : \"sai62@sai.com\"  \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/user/updateprofile",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"updateprofile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api subject create",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZGViMjBkNmQyMTA5YmE4ZTg5ZWZkZCIsImlhdCI6MTY1ODc2MTc1MCwiZXhwIjoxNjU4ODQ4MTUwfQ.eFfG6tAgh20TL_yW89FAEWX5_oe1EYJBDR0VTkudSuQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"subject\" : \"Economics\",\n    \"stream\": [\"Commerce\"] \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/subject/create",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"subject",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api all subject",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZGViMjBkNmQyMTA5YmE4ZTg5ZWZkZCIsImlhdCI6MTY1ODc2MTc1MCwiZXhwIjoxNjU4ODQ4MTUwfQ.eFfG6tAgh20TL_yW89FAEWX5_oe1EYJBDR0VTkudSuQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/subjects/getall?limit=10&order=1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"subjects",
+						"getall"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "order",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api training create",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyZGViMjBkNmQyMTA5YmE4ZTg5ZWZkZCIsImlhdCI6MTY1ODc2MTc1MCwiZXhwIjoxNjU4ODQ4MTUwfQ.eFfG6tAgh20TL_yW89FAEWX5_oe1EYJBDR0VTkudSuQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"training\" : \"International arts\",\n    \"subject\": [\"English\",\"Social Science,\",\"Finance\"] ,\n    \"type\" : [\"Detailed\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/training/create",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"training",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api get all training",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/training/getall?limit=10&order=1&subjects=Finance",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"training",
+						"getall"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10"
+						},
+						{
+							"key": "order",
+							"value": "1"
+						},
+						{
+							"key": "subjects",
+							"value": "Finance"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

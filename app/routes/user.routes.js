@@ -11,10 +11,10 @@ module.exports = function (app) {
     next();
   });
 
-  app.post("/api/test/updateuserpassword", [authJwt.verifyToken], controller.userPassword);
+  app.post("/api/user/updateuserpassword", [authJwt.verifyToken], controller.userPassword);
 
   app.post(
-    "/api/test/updateprofile",
+    "/api/user/updateprofile",
     [
       authJwt.verifyToken,
       verifyUpdate.checkDuplicateUsername,
