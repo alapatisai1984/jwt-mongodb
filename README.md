@@ -6,10 +6,10 @@ Docker images : node,mongo db
 
 docker compose up 
 
-
 if not using docker 
 
 npm install 
+
 node server.js 
 
 url : http://localhost:8080
